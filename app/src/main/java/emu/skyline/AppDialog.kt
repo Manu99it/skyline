@@ -57,7 +57,7 @@ class AppDialog : BottomSheetDialogFragment() {
         super.onStart()
 
         val behavior = BottomSheetBehavior.from(requireView().parent as View)
-        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        behavior.addBottomSheetCallback(binding.dragIndicatorLayout.callback)
 
         dialog?.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BUTTON_B && event.action == KeyEvent.ACTION_UP) {
@@ -76,6 +76,9 @@ class AppDialog : BottomSheetDialogFragment() {
         binding.gameIcon.setImageBitmap(item.icon ?: missingIcon)
         binding.gameTitle.text = item.title
         binding.gameSubtitle.text = item.subTitle ?: item.loaderResultString(requireContext())
+        // Make the title text view selected for marquee to work
+        binding.gameTitle.isSelected = true
+        binding.gameSubtitle.isSelected = true
 
         binding.gamePlay.isEnabled = item.loaderResult == LoaderResult.Success
         binding.gamePlay.setOnClickListener {

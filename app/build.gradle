@@ -9,7 +9,7 @@ android {
     compileSdkVersion 31
     buildToolsVersion '31.0.0'
     defaultConfig {
-        applicationId "skyline.emu"
+        applicationId "skyline.emu.titlemeta"
 
         minSdkVersion 29
         targetSdkVersion 31

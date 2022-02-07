@@ -1,82 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:nextFocusRight="@id/game_play"
-    android:padding="16dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/game_icon"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:contentDescription="@string/icon"
-        android:focusable="false"
-        app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
-        tools:src="@drawable/default_icon" />
+    <emu.skyline.views.DragIndicatorLinearLayout
+        android:id="@+id/drag_indicator_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="16dp"
+        android:clipToPadding="false">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/game_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceListItem"
-            android:textSize="18sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="The Legend of Zelda: Breath of the Wild" />
-
-        <TextView
-            android:id="@+id/game_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-            android:textColor="@android:color/tertiary_text_light"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/game_title"
-            app:layout_constraintStart_toStartOf="@id/game_title"
-            tools:text="Nintendo" />
-
-        <com.google.android.flexbox.FlexboxLayout
+        <LinearLayout
+            android:id="@+id/peek_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="12dp"
-            app:layout_constraintStart_toStartOf="@id/game_title"
-            app:layout_constraintTop_toBottomOf="@id/game_subtitle"
-            app:flexWrap="wrap">
+            android:animateLayoutChanges="true"
+            android:clipToPadding="false"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/game_play"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:nextFocusDown="@id/game_play"
+                tools:ignore="RtlHardcoded">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/game_icon"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:contentDescription="@string/icon"
+                    android:focusable="false"
+                    app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
+                    tools:src="@drawable/default_icon" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/game_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:textSize="18sp"
+                        tools:text="The Legend of Zelda: Breath of the Wild" />
+
+                    <TextView
+                        android:id="@+id/game_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="14sp"
+                        tools:text="Nintendo" />
+
+                    <TextView
+                        android:id="@+id/update_dlc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="v1.6.0 • 2 DLCs"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@id/game_title"
+                        app:layout_constraintTop_toBottomOf="@id/game_title" />
+
+                    <RatingBar
+                        style="?attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:max="5"
+                        android:min="0"
+                        android:numStars="5"
+                        android:rating="3"
+                        android:stepSize="1" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="6dp"
-                android:focusedByDefault="true"
-                android:text="@string/play"
-                android:textColor="?attr/colorAccent"
-                app:layout_minWidth="146dp"
-                app:icon="@drawable/ic_play"
-                app:iconTint="?attr/colorAccent" />
+                android:layout_gravity="start"
+                android:layout_marginTop="12dp"
+                app:flexWrap="nowrap"
+                app:justifyContent="space_between"
+                app:layout_constraintStart_toStartOf="@id/game_title"
+                app:layout_constraintTop_toBottomOf="@id/game_subtitle">
 
-            <Button
-                android:id="@+id/game_pin"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/game_play"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusedByDefault="true"
+                    android:text="@string/play"
+                    app:icon="@drawable/ic_play"
+                    app:layout_flexBasisPercent="60%"
+                    app:layout_minWidth="120dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/game_pin"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    app:icon="@drawable/ic_add_home"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:layout_maxWidth="55dp" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                app:layout_maxWidth="55dp"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:icon="@drawable/ic_add_home"
-                android:textColor="?attr/colorAccent" />
-        </com.google.android.flexbox.FlexboxLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+                android:layout_gravity="start"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                app:alignItems="center"
+                app:justifyContent="space_evenly">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/rating_column"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="In-game menu"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        android:textSize="16sp" />
+
+
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/circle"
+                        android:backgroundTint="@android:color/holo_orange_light" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="32dp"
+                    android:background="@color/dividerLight" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FPS"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/fps_column"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="60"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="32dp"
+                    android:background="@color/dividerLight" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RAM"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/mem_column"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3.5 GB"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/app_dialog_block"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <include layout="@layout/app_dialog_block"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+    </emu.skyline.views.DragIndicatorLinearLayout>
+</androidx.core.widget.NestedScrollView>

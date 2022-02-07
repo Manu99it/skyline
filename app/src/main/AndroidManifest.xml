@@ -105,7 +105,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="skyline.emu.fileprovider"
+            android:authorities="skyline.emu.titlemeta.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
