@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import emu.skyline.adapter.GenericAdapter
+import emu.skyline.adapter.appdialog.IssuesItem
 import emu.skyline.data.AppItem
 import emu.skyline.databinding.AppDialogBinding
 import emu.skyline.loader.LoaderResult
@@ -79,6 +81,15 @@ class AppDialog : BottomSheetDialogFragment() {
         // Make the title text view selected for marquee to work
         binding.gameTitle.isSelected = true
         binding.gameSubtitle.isSelected = true
+
+        val list = listOf(IssuesItem("title", "description"),
+            IssuesItem("title1", "description1"))
+
+        val adapter = GenericAdapter().apply {
+            setItems(list)
+        }
+        binding.issuesItems.adapter = adapter
+        binding.issuesItems.isNestedScrollingEnabled = false
 
         binding.gamePlay.isEnabled = item.loaderResult == LoaderResult.Success
         binding.gamePlay.setOnClickListener {

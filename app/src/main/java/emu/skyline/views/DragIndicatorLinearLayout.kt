@@ -30,7 +30,7 @@ class DragIndicatorLinearLayout : LinearLayout {
 
     inner class DragIndicatorCallback : BottomSheetBehavior.BottomSheetCallback() {
         override fun onStateChanged(bottomSheet : View, newState : Int) {
-            if (newState == BottomSheetBehavior.STATE_EXPANDED)
+            if (newState == BottomSheetBehavior.STATE_EXPANDED && bottomSheet.top == 0)
                 binding.dragIndicator.visibility = View.INVISIBLE
             else
                 binding.dragIndicator.visibility = View.VISIBLE

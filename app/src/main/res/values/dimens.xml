@@ -3,4 +3,10 @@
     <dimen name="grid_padding">8dp</dimen>
     <dimen name="corner_radius">6dp</dimen>
     <dimen name="corner_radius_large">12dp</dimen>
+
+    <!-- Main - AppDialog -->
+    <dimen name="section_spacing">16dp</dimen>
+    <dimen name="section_title_text">16sp</dimen>
+    <dimen name="section_content_padding">10dp</dimen>
+    <dimen name="section_item_content_padding">12dp</dimen>
 </resources>

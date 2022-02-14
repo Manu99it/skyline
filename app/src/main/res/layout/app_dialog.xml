@@ -9,228 +9,285 @@
         android:id="@+id/drag_indicator_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:paddingBottom="16dp"
-        android:clipToPadding="false">
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="16dp">
 
-        <LinearLayout
-            android:id="@+id/peek_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:clipToPadding="false"
-            android:orientation="vertical">
+            android:layout_marginTop="4dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/game_icon"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:contentDescription="@string/icon"
+                android:focusable="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
+                tools:src="@drawable/default_icon" />
+
+            <TextView
+                android:id="@+id/game_title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:nextFocusDown="@id/game_play"
-                tools:ignore="RtlHardcoded">
+                android:layout_marginStart="12dp"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/game_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="The Legend of Zelda: Breath of the Wild" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/game_icon"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:contentDescription="@string/icon"
-                    android:focusable="false"
-                    app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
-                    tools:src="@drawable/default_icon" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="16dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/game_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="marquee"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:singleLine="true"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                        android:textSize="18sp"
-                        tools:text="The Legend of Zelda: Breath of the Wild" />
-
-                    <TextView
-                        android:id="@+id/game_subtitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="marquee"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:singleLine="true"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                        android:textColor="@android:color/tertiary_text_light"
-                        android:textSize="14sp"
-                        tools:text="Nintendo" />
-
-                    <TextView
-                        android:id="@+id/update_dlc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="v1.6.0 • 2 DLCs"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                        android:textColor="@android:color/tertiary_text_light"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="@id/game_title"
-                        app:layout_constraintTop_toBottomOf="@id/game_title" />
-
-                    <RatingBar
-                        style="?attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:max="5"
-                        android:min="0"
-                        android:numStars="5"
-                        android:rating="3"
-                        android:stepSize="1" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <com.google.android.flexbox.FlexboxLayout
+            <TextView
+                android:id="@+id/game_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginTop="12dp"
-                app:flexWrap="nowrap"
-                app:justifyContent="space_between"
-                app:layout_constraintStart_toStartOf="@id/game_title"
-                app:layout_constraintTop_toBottomOf="@id/game_subtitle">
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textColor="@android:color/tertiary_text_light"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/game_title"
+                app:layout_constraintTop_toBottomOf="@+id/game_title"
+                tools:text="Nintendo" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/game_play"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:focusedByDefault="true"
-                    android:text="@string/play"
-                    app:icon="@drawable/ic_play"
-                    app:layout_flexBasisPercent="60%"
-                    app:layout_minWidth="120dp" />
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="?attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:max="5"
+                android:min="0"
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="1"
+                app:layout_constraintStart_toStartOf="@+id/game_title"
+                app:layout_constraintTop_toBottomOf="@+id/game_subtitle" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/game_pin"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    app:icon="@drawable/ic_add_home"
-                    app:iconGravity="textStart"
-                    app:iconPadding="0dp"
-                    app:layout_maxWidth="55dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/game_play"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusedByDefault="true"
+                android:minWidth="146dp"
+                android:stateListAnimator="@null"
+                android:text="@string/play"
+                app:icon="@drawable/ic_play"
+                app:layout_constraintBottom_toBottomOf="@+id/game_icon"
+                app:layout_constraintStart_toStartOf="@+id/game_title"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
-            </com.google.android.flexbox.FlexboxLayout>
 
-            <com.google.android.flexbox.FlexboxLayout
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/game_pin"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="55dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="12dp"
+                android:contentDescription="@string/pin_to_homescreen"
+                app:icon="@drawable/ic_add_home"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/game_play"
+                app:layout_constraintStart_toEndOf="@+id/game_play"
+                app:layout_constraintTop_toTopOf="@id/game_play" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/updates_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/updates_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/updates"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textSize="@dimen/section_title_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/updates_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textColor="@android:color/tertiary_text_light"
+                app:layout_constraintBottom_toBottomOf="@id/updates_title"
+                app:layout_constraintStart_toEndOf="@id/updates_title"
+                tools:text="1.0.0" />
+
+            <TextView
+                android:id="@+id/no_updates_available_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/section_content_padding"
+                android:text="@string/no_updates"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/updates_title" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/updates_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginTop="24dp"
-                android:visibility="gone"
-                app:alignItems="center"
-                app:justifyContent="space_evenly">
+                android:layout_marginTop="@dimen/section_content_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/updates_title"
+                tools:visibility="gone"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/rating_column"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="In-game menu"
-                        android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                        android:textSize="16sp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dlcs_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
 
+            <TextView
+                android:id="@+id/dlcs_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dlcs"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textSize="@dimen/section_title_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                    <View
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@drawable/circle"
-                        android:backgroundTint="@android:color/holo_orange_light" />
+            <TextView
+                android:id="@+id/no_dlcs_available_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/section_content_padding"
+                android:text="@string/no_dlcs"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dlcs_title" />
 
-                </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dlcs_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/section_content_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dlcs_title"
+                tools:visibility="gone"/>
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="32dp"
-                    android:background="@color/dividerLight" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/issues_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/section_spacing"
+            android:orientation="vertical"
+            android:visibility="visible">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="FPS"
-                        android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                        android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/section_content_padding"
+                android:text="@string/issues"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textSize="@dimen/section_title_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/fps_column"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="60"
-                        android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="32dp"
-                    android:background="@color/dividerLight" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="RAM"
-                        android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/mem_column"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="3.5 GB"
-                        android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-            </com.google.android.flexbox.FlexboxLayout>
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/issues_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </LinearLayout>
 
-        <include layout="@layout/app_dialog_block"
-            android:layout_marginTop="16dp"
+        <LinearLayout
+            android:id="@+id/notes_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
+            android:layout_marginTop="@dimen/section_spacing"
+            android:orientation="vertical"
+            android:visibility="visible">
 
-        <include layout="@layout/app_dialog_block"
-            android:layout_marginTop="16dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/section_content_padding"
+                android:text="@string/notes"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textSize="@dimen/section_title_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notes_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cheats_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
+            android:layout_marginTop="@dimen/section_spacing"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/section_content_padding"
+                android:text="@string/cheats"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textSize="@dimen/section_title_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cheats_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/saves_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/section_spacing"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/section_content_padding"
+                android:text="@string/saves"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textSize="@dimen/section_title_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/saves_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
 
     </emu.skyline.views.DragIndicatorLinearLayout>
 </androidx.core.widget.NestedScrollView>
